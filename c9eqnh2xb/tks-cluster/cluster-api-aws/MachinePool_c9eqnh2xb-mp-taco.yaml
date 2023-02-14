@@ -1,0 +1,29 @@
+# Source: cluster-api-aws/templates/bak-machine-pool.yaml
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: MachinePool
+metadata:
+  name: c9eqnh2xb-mp-taco
+  namespace: c9eqnh2xb
+spec:
+  clusterName: c9eqnh2xb
+  replicas: 3
+  template:
+    metadata:
+      labels:
+            servicemesh: enabled
+            taco-ingress-gateway: enabled
+            taco-lma: enabled
+    spec:
+      bootstrap:
+        configRef:
+          apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+          kind: KubeadmConfig
+          name: c9eqnh2xb-mp-taco
+          namespace: c9eqnh2xb
+      clusterName: c9eqnh2xb
+      infrastructureRef:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+        kind: AWSMachinePool
+        name: c9eqnh2xb-mp-taco
+        namespace: c9eqnh2xb
+      version: v1.22.5
